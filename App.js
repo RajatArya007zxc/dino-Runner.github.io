@@ -1,5 +1,7 @@
 const dino=document.querySelector('.dino')
 let isJumping=false;
+let gravity=0.9;
+
 
 const control=(e)=>{
 
@@ -7,32 +9,34 @@ const control=(e)=>{
          if(!isJumping){
  isJumping=true;
  jumpingFunction();
-         }
-        
-        
+         }  
 
      }
 }
 document.addEventListener('keyup',control);
 
+let position =0;
+
 function jumpingFunction(){
 
-    let position=0;
+    let count=0;
 
     const timerId=setInterval(function(){
 
-       if(position===150){
+       if(count===15){
            clearInterval(timerId);
 
            ///dino down
 
           const downInterval=setInterval(function(){
   
-            if(position===0) {
+            if(count===0) {
                 clearInterval(downInterval)
                 isJumping=false;
             }
-            position-=30;
+            position-=5;
+            count--;
+            position*=gravity;
             dino.style.bottom=position+'px';
           },20)
        }
@@ -40,6 +44,8 @@ function jumpingFunction(){
         ///dino up
         console.log('up')
         position+=30;
+        count++;
+        position*=gravity;
         dino.style.bottom=position+'px';
 
     },20)
