@@ -1,4 +1,5 @@
 const dino=document.querySelector('.dino')
+const grid=document.querySelector('.grid');
 let isJumping=false;
 let gravity=0.9;
 
@@ -52,3 +53,35 @@ function jumpingFunction(){
 
     
 }
+
+////adding obstacle 
+
+function generateObstacle(){
+
+     let obstaclePosition=1000;
+    const obstacle=document.createElement('div');
+    obstacle.classList.add('obstacle');
+    
+    // adding into grid 
+    grid.appendChild(obstacle);
+    obstacle.style.left=obstaclePosition + 'px';
+
+
+
+    // let making moving obstacle
+    let timerId=setInterval(function(){
+
+        if(obstaclePosition===0){
+ 
+             clearInterval(timerId)
+        }
+
+        obstaclePosition-=10;
+        obstacle.style.left=obstaclePosition + 'px'
+    },20)
+
+
+}
+
+generateObstacle();
+
